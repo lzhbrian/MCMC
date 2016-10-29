@@ -1,0 +1,76 @@
+
+\documentclass{sig-alternate-05-2015}
+\usepackage{subfigure}
+\usepackage{balance}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{chngpage}
+
+\newcommand{\para}[1]{{\vspace{2pt} \bf \noindent #1 \hspace{8pt}}}
+
+\newenvironment{packed_itemize}{
+\begin{itemize}
+
+}{\end{itemize}}
+
+
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
+
+\begin{document}
+
+\title{MCMC}
+\author{
+    \alignauthor Tzu-Heng Lin, 2014011054\\
+    \affaddr{W42, Department of Electronic Engineering, Tsinghua
+      University, Beijing, China\\}
+    \email{lzhbrian@gmail.com}
+}
+
+
+\maketitle
+\begin{abstract}
+Write in the last.
+\end{abstract}
+
+
+
+
+%
+%  Use this command to print the description
+%
+\printccsdesc
+
+\input{Introduction}
+\input{Relatedwork}
+\input{Metropolis_hastings}
+\input{RBM}
+% \input{Dataset}
+% \input{Analysis}
+% \input{Clustering}
+% \input{Reason}
+
+
+% Conclusion
+\section{Conclusion} \label{sec:conclusion}
+Write in the last.
+
+
+\renewcommand{\baselinestretch}{1.1}
+\balance
+
+\small
+
+% Acknowledgement
+\section{Acknowledgement} \label{sec:acknowledgement}
+I would like to thank ....
+
+% Reference
+\bibliographystyle{abbrv}
+\bibliography{ref}
+
+	
+
+\end{document}
+
