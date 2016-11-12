@@ -9,7 +9,6 @@
 		% W - weight
 		% a - visible bias
 		% b - hidden bias
-
 		% max_iteration_time
 		% set_eps - for convergence
 	% Output:
