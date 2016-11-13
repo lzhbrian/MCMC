@@ -1,6 +1,8 @@
 %!TEX root = RBM.tex
 
 \subsubsection{Annealed Importance Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/AIS.m} in Matlab}}
+
+\para{Algorithm} 
 Annealed Importance Sampling(AIS)\cite{neal2001annealed,salakhutdinov2009learning} is probably one of the most preferable estimating methods avaible.
 
 Previous work \cite{mackay2003information} have shown that if $P_{A}$ and $P_{B}$ in the SIS method is not close enough, the estimator would be very poor.
@@ -34,7 +36,7 @@ this procedure is shown in Figure~\ref{fig:xkxk1}.
 	\label{fig:xkxk1}
 \end{figure}
 
-Note that model A indicates an initial model which we can easily compute all its configurations.
+Note that model A indicates an initial model which we can easily compute all its configurations. Commonly, we choose an RBM model with $\theta = \{0,0,0\}$
 
 $\mathbf \beta$ in the above equations is defined by users as a set of inverse temperatures $\{0= \beta_{1} < \beta_{2} < ... < \beta_{K} =1\}$, which can define a sequence of
 \begin{equation}
@@ -44,6 +46,10 @@ where
 \begin{equation}
 P^{*}_{k}(\mathbf v)=\sum_{h^{A}h^{B}}e^{(1-\beta_{k})E(\mathbf v, \mathbf h^{A};\theta_{A})+\beta_{k}E(\mathbf v,\mathbf h^{B};\theta_{B})}
 \end{equation}
+
+
+\para{Initialize $Z_{A}$ with dataset}
+In \cite{salakhutdinov2009learning}, Ruslan et al. also notice a method to make $Z_{A}$ near $Z_{B}$. As the length \& time limit, we will not specify it here.
 
 
 The pseudo code of this algorithm is shown below:

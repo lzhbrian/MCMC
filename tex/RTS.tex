@@ -2,12 +2,39 @@
 
 \subsubsection{Rao-Blackwellized Tempered Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/RTS.m} in Matlab}}
 
-Similar to AIS, Rao-Blackwellized Tempered(RTS)\cite{carlson2016partition} Sampling also has a set of inverse temperatures $\{0= \beta_{1} < \beta_{2} < ... < \beta_{K} =1\}$, which can define a sequence of
+\para{Algorithm}
+Similar to AIS, Rao-Blackwellized Tempered (RTS)\cite{carlson2016partition} Sampling also has a set of inverse temperatures $\{0= \beta_{1} < \beta_{2} < ... < \beta_{K} =1\}$, which can define a sequence of
 \begin{equation}
 f_{k}(\mathbf x) \propto f(\mathbf x)^{\beta_{k}} p_{1}(\mathbf x)^{1-\beta_{k}}
 \end{equation}
 
+Different from AIS, we do not traverse $\mathbf \beta$. Instead we sample a $\beta^{*}$ every loop, from the $\mathbf \beta$ set with the distribution $(\beta|x)$.
 
+Subsequently, we sample from $x_{k}$ to $x_{k+1}$ by the probability of $q(x|\beta^{*})$ just like what we did in AIS, shown in Figure~\ref{fig:xkxk1}. However, what also different from AIS is that, we have to iterate from $x_{k}$ to $x_{k+1}$ many times(i.e. 50 times in\cite{carlson2016partition} ) for the sake of getting a better $x_{k+1}$.
 
+At the last of every loop, we update the lower variance estimator $\hat{\mathbf c}$ by
+\begin{equation}
+\hat{c}_{k} = \hat{c}_{k} + \frac{1}{N}q(\beta_{k}|x)
+\end{equation}
+
+Finally, we get $Z_{k}$ by
+\begin{equation}
+\hat{Z}_{k}^{RTS} = \hat{Z}_{k}\frac{r_{1}\hat{c}_{k}}{r_{k}\hat{c}_{1}},~~k=2,...,K
+\end{equation}
+in which what we do care is $Z_{B} \approx \hat{Z}_{K}^{RTS}$.
+
+The posterier distribution $q(\beta_{k}|x)$ in the above equations is defined by:
+\begin{equation}
+q(\beta_{k}|x) = \frac{f_{k}(x)r_{k}/\hat{Z}_{k}}{\sum_{k'=1}^{K} f_{k'}(x)r_{k'}/\hat{Z}_{k'}}
+\end{equation}
+
+\para{Practice}
+In the paper\cite{carlson2016partition}, Carlson et al. note an initializing method to initialize $Z_{k}$, whose procedure is just like the above process. The only difference is that they sampled $\beta_{k}$ by uniform distribution in every loop, not by the distribution $(\beta|x)$. They claim that after doing such initializing work, then we conduct the algorithms above would acquire a better result.
+
+In our real practice, we directly use the initializing method mentioned above by selecting $\beta_{k}$ with a uniform distribution in every loop. We also initialize the value of $Z_{A}$ by the method we have mentioned in the AIS section using the dataset. And we have found that the result is already satisfying, there is no need to conduct more loops with $\beta_{k}$ sampled by $(\beta|x)$.
+
+Also, we found that we have to conduct the procedure above for several times s.t. we can acquire our desired partition function value.(i.e. We did it for 100 times, that is to say we update $\mathbf Z$ for 100 times).
 
 The pseudo code of this algorithm is shown below:
+
+
