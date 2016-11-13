@@ -3,21 +3,39 @@
 \section{Partition Function Estimation} \label{sec:rbm}
 
 
-
 \subsection{Restricted Bolztmann Machine}
-Restricted Bolzmann Machine ...
-However, calculating partition functions has always been a ...
+Co-invented and enhanced largely\cite{hinton2006reducing} by Geoff Hinton, a Restricted Bolzmann Machine(RBM)\cite{mcclelland1987parallel} is a model which brings the idea of a physics concept to the field of computer science.
 
+\subsubsection{Introduction}
+An RBM is a two-layer undirected model. The first layer of the RBM is called visible layer, and the second is called the hidden layer. In the model, every visible units are connected to all hidden units and vice versa. For every given value of visible layer $\mathbf v$ \& hidden layer $\mathbf h$, we can define an energy of this state.
+\begin{equation}
+E(\mathbf v,\mathbf h;\theta)=-\mathbf v^T\mathbf W\mathbf h-\mathbf b^T\mathbf v-\mathbf a^T\mathbf h
+\end{equation}
+where $\theta =\{W,\mathbf b,\mathbf a\}$ are the model configurations. $W_{ij}$ represents the weight between visible unit $v_{i}$ and hidden unit $h_{j}$. $\mathbf b$ \& $\mathbf a$ are biases for visible and hidden layer, respectively.
+
+\subsubsection{Training an RBM}
+On training an RBM, we want our RBM model to have a lowest scale of energy. By doing so, we have to calculate the joint distribution over the visible and hidden units, which is defined by:
+\begin{equation}
+	p(\mathbf v,\mathbf h;\theta)=\frac{e^{-E(\mathbf v,\mathbf h;\theta)}}{Z(\theta)}
+\end{equation}
+where partition function
+\begin{equation}
+	Z(\theta)=\sum_{\mathbf v} \sum_{\mathbf h} e^{-E(\mathbf v,\mathbf h;\theta)}
+\end{equation}
+
+However, calculating partition functions has always been an intractable work since we have to traverse all the possible state of $\mathbf v$ \& $\mathbf h$, which would become unrealistic for the real use.
+
+So we have to introduce methods to estimate the partition functions instead of just calculating it in brute force. Although some deviation may include in the estimation, but the efficiency along with them make them preferable. In fact, studies have shown that only few deviation is included that we could just ignore it since it does not interfere with our training.
 
 
 \subsection{Algorithms}
 
 \subsubsection{Thouless-Anderson-Palmer Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/TAP.m} in Matlab}}
-
-
-
 \subsubsection{Annealed Importance Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/AIS.m} in Matlab}}
 \subsubsection{Rao-Blackwellized Tempered Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/RTS.m} in Matlab}}
+
+
+
 \subsubsection{Other method}
 There are many other methods which can also estimate the partition functions. Such as Self-adjusted mixture sampling(SAMS)\cite{tan2015optimally} proposed a method to estimate multiple partition functions together to improve the efficiency. As the length \& time limit, we only implement 3 methods here in this paper.
 

@@ -37,7 +37,7 @@
 \maketitle
 \begin{abstract}
 Markov Chain Monte Carlo (MCMC) is a technique to make an estimation of a statistic by simulation in a complex model. Restricted Bolztmann Machine(RBM) is a crucial model in the field of Machine Learning. However, training a large RBM model will include intractable computation of the partition functions, i.e.Z($\theta$). This problem has aroused interest in the work of estimation using a MCMC methods.
-In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most prevalent sampling methods, and analyze its correctness \& performance. We then implement three algorithms: TAP, AIS, RTS, to estimate partition functions of an RBM model. Our work not only give an introduction about the available algorithms, but systematically compare the performance \& difference between them. We seek to provide an overall view in the field of MCMC.
+In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most prevalent sampling methods, and analyze its correctness \& performance, along with the choice of the accepting rate. We then implement three algorithms: TAP, AIS, RTS, to estimate partition functions of an RBM model. Our work not only give an introduction about the available algorithms, but systematically compare the performance \& difference between them. We seek to provide an overall view in the field of MCMC.
 \end{abstract}
 
 
@@ -61,7 +61,9 @@ In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most p
 \newpage
 % Conclusion
 \section{Conclusion} \label{sec:conclusion}
-In this paper, we discuss about the Markov Chain Monte Carlo sampling method which are now undoubtedly one of the most important sampling methods. 
+In this paper, we discuss about the Markov Chain Monte Carlo method which are now undoubtedly one of the most important sampling methods.
+
+We comprehensively introduce the concept of Metropolis-Hastings Algorithm and conduct an experiment to verify its correctness. We also make some analysis about how accepting rate would interfere the sampling result.
 
 We systematically compare three methods of partition function estimationm which are crucial works in training a Restricted Bolztmann Machine or a Deep Belief Network. 
 

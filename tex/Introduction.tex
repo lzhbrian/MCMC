@@ -21,7 +21,7 @@ then we call $\pi$ the stationary distribution, it denotes the final state distr
 Markov Chain has a wide application in many fields in the real world, such as social science\cite{acemoglu2011political}, econmics \& finance\cite{hamilton1989new} and of course, computer science\cite{page1999pagerank}, etc.
 
 \para{Markov Chain Monte Carlo}
-Given a probability distribution $p(x)$, it would be a great thing if we could generate some samples of it by a simple method, so here comes the Markov Chain Monte Carlo(MCMC). If we could construct a Markov Chain which its stationary distribution $\pi$ just equals to $p(x)$, then we could use this Markov Chain to sample from this distribution $p(x)$. And this is the main idea of MCMC
+If we are given a probability distribution $p(x)$, it would be a great thing if we could generate some samples of it by a simple method, so here comes the Markov Chain Monte Carlo(MCMC) method. If we could construct a Markov Chain which its stationary distribution $\pi$ just equals to $p(x)$, then we could use this Markov Chain to sample from this distribution $p(x)$. And this is the main idea of MCMC.
 
 In this paper, we implement the Metropolis-Hastings Algorithm, which is one of the most widely used sampling method. We also deal with the accepting rate, which I will introduce later, for previous work\cite{roberts1997weak} have shown that the accepting rate may influence the result of the experiment and there is theoretical support in choosing an optimal accepting rate.
 

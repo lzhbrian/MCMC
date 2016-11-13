@@ -3,7 +3,9 @@
 \section{Metropolis-Hastings} \label{sec:metropolis_hastings}
 In the Introduction, we have shown the main idea of an MCMC sampling method. In this section, we will introduce the Metropolis Hastings Algorithm and conduct an experiment.
 
-\subsection{Algorithm\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/metropolis_hastings/metropolis_hasting.R} in Matlab}}
+
+
+\subsection{Algorithm\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/metropolis_hastings/metropolis_hasting.R} in R\cite{R}}}
 
 \subsubsection{Detailed Balance Condition}
 Before stepping further into the MH Algorithm, We would first introduce a theorem called the Detailed Balance Condition. 
@@ -49,7 +51,11 @@ A solution is that we multiply both $\alpha(i,j)$ \& $\alpha(j,i)$ with a consta
 \begin{equation}
 \alpha(i,j) = \min\left\{\frac{p(j)q(j,i)}{p(i)q(i,j)},1\right\}
 \end{equation}
-and we get Metropolis-Hastings Algorithm\cite{hastings1970monte}.
+and now, we get Metropolis-Hastings Algorithm\cite{hastings1970monte}.
+
+I would like to further introduce one more concept called accepting rate(not accepting ratio), which denotes the statistic ratio of accepting the transition. i.e. If we request 10 transition and we accept 8 times, then the accepting rate would be 0.8. This concept is crucial when we are dealing with a continual Markov Chain to use the MH algorithm.
+
+
 
 \subsubsection{Symmetric Case}
 In a Markov Chain whose transition matrix is symmetric, we have
@@ -71,8 +77,10 @@ norm_{2} \end{array} \right)
 \end{equation}
 
 
-\subsection{Sampling Results}
-In our work, we use an example of a bivariate Normal distribution, with
+
+
+\subsection{Sampling Experiment}
+For our experiment, we use an example of a bivariate Normal distribution, with
 $$ \mu = \left( \begin{array}{ccc}
 5 \\
 10 \end{array} \right), 
@@ -83,16 +91,18 @@ $$ \mu = \left( \begin{array}{ccc}
 By theoretical computation, we can easily compute the the pearson correlation between the two dimensional value is 0.5.
 $$ \rho = 0.5 $$
 
-We then generate 10,000 samples using the MH algorithm, setting the standard deviation of proposal to 3.0. We can see from the result (Figure~\ref{fig:sample_result}) that we have derived 10,000 sampled points with pearson correlation = 0.5, which matches the theoretical value.
+We then generate 10,000 samples using the MH algorithm and take the second half (i.e. the last 5,000 points), setting the standard deviation of proposal to 3.0. We can see from the result (Figure~\ref{fig:sample_result}) that we have derived 5,000 sampled points whose pearson correlation value $\rho=0.50009$, which matches the theoretical value.
 
 \begin{figure}[tb]
 % \vspace{-0.5in}
   	\centering
   	\includegraphics[width=0.4\textwidth]{figure/sample_result.eps}
 % \vspace{-0.2in}
-	\caption{Sampling result of 10,000 points \protect\\ correlation = 0.500873 , set sd.T = 3.0}
+	\caption{Sampling result of 5,000 points \protect\\ correlation = 0.50009 , set sd.T = 3.0}
 	\label{fig:sample_result}
 \end{figure}
+
+
 
 
 \subsection{Performance Analysis}
@@ -113,6 +123,9 @@ Roberts et al. have shown in previous work\cite{roberts1997weak} that the optima
 
 \subsubsection{Efficiency}
 Due to the limit of the accepting rate, for a high dimensional condition, using the MH sampling methods may spend more time in traverse all of the possible states, which could sometimes be be less satisfying. Thus, many would switch to Gibbs Sampling Algorithm.
+
+
+
 
 \subsection{Gibbs Sampling}
 Gibbs Sampling is a special case of Metropolis Hastings Algorithm, by letting the accepting rate = 1, we will get a Gibbs Sampler. As the length \& time limit, we will not specify more here.
