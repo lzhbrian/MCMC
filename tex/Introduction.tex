@@ -7,17 +7,31 @@
 \section{Introduction} \label{sec:introduction}
 
 \para{Markov Chain}
+A Markov Chain is a special stochastic process in which the current state only depends on its previous state, we call this property the Markov property or memorylessness. i.e.
+\begin{equation}
+P(X_{t+1}=x|X_t, X_{t-1}, \cdots) =P(X_{t+1}=x|X_t)
+\end{equation}
 
+Given a Markov Chain, if a vector $\pi$, has the property:
+\begin{equation}
+\pi=\pi P
+\end{equation}
+then we call $\pi$ the stationary distribution, it denotes the final state distribution of the stochastic process in a Markov Chain.
+
+Markov Chain has a wide application in many fields in the real world, such as social science\cite{acemoglu2011political}, econmics \& finance\cite{hamilton1989new} and of course, computer science\cite{page1999pagerank}, etc.
 
 \para{Markov Chain Monte Carlo}
+Given a probability distribution $p(x)$, it would be a great thing if we could generate some samples of it by a simple method, so here comes the Markov Chain Monte Carlo(MCMC). If we could construct a Markov Chain which its stationary distribution $\pi$ just equals to $p(x)$, then we could use this Markov Chain to sample from this distribution $p(x)$. And this is the main idea of MCMC
 
+In this paper, we implement the Metropolis-Hastings Algorithm, which is one of the most widely used sampling method. We also deal with the accepting rate, which I will introduce later, for previous work\cite{roberts1997weak} have shown that the accepting rate may influence the result of the experiment and there is theoretical support in choosing an optimal accepting rate.
 
 \para{Restricted Boltzmann Machine}
 A Restricted Bolztmann Machine (RBM)\cite{mcclelland1987parallel} is a significant work bringing hypothesis in statistical physics to computer science. By stacking several layers of RBM, we will get a fundamental model, Deep Belief Network\cite{hinton2006reducing}, in the field of Deep Learning, which is nowadays the hottest class of algorithms used in Machine Learning.
 
 \para{Estimating Partition functions} 
-In the process of training an RBM, however, will include incontractable computation of the partition function.
-In this paper, we implement three prevalent methods of estimating a partition function, Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training}, Annealed Importance Sampling(AIS)\cite{neal2001annealed,salakhutdinov2009learning}, Rao-Blackwellized Tempered Sampling(RTS)\cite{carlson2016partition}, respectively, and give an overall comparison on the theory \& performance between them.
+In the process of training an RBM, however, will include incontractable computation of the partition function. When the model grows large, the complexity of this work will be incompletable. The good news is, several researches have shown that there are ways to avoid this by using an MCMC approach instead, to estimate it.
+
+In this paper, we implement three prevalent MCMC methods of estimating a partition function, Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training}, Annealed Importance Sampling(AIS)\cite{neal2001annealed,salakhutdinov2009learning}, Rao-Blackwellized Tempered Sampling(RTS)\cite{carlson2016partition}, respectively, and give an overall comparison on the theory \& performance between them.
 
 
 
