@@ -1,0 +1,25 @@
+%!TEX root = RBM.tex
+
+\subsubsection{Thouless-Anderson-Palmer Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/TAP.m} in Matlab}}
+Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training} is a very efficient and easy-to-practice iterative procedure based on an improved mean field method from statistical physics called Thouless-Anderson-Palmer approach.
+
+The main idea of this method is to iteratively compute the magnetization vector $m^{v}$,$m^{h}$, and then input the values into the Legendre transform of the free energy $F=log(Z(\theta))$ to compute it.
+
+The Legendre transform of $F$ to the second order is:
+\begin{equation}
+\begin{split}
+\Gamma(\mathbf m^{v},\mathbf m^{h}) &\approx - S(\mathbf m^{v},\mathbf m^{h}) - \sum_{i} a_{i}m^{v}_{i} - \sum_{j} b_{j}m^{h}_{j} \\
+& - \sum_{i,j} \Bigg( W_{i,j}m^{v}_{i}m^{h}_{j} \\
+& - 0.5W_{ij}\Big(m^{v}_{i}-(m^{v}_{i})^2\Big)\Big(m^{h}_{j}-(m^{h}_{j})^2\Big) \Bigg)
+\end{split}
+\end{equation}
+where $S(\mathbf m^{v},\mathbf m^{h})$ indicates the entropy:
+\begin{equation}
+\begin{split}
+S(\mathbf m^{v},\mathbf m^{h}) &= - \sum_{i} \Bigg(m^{v}_{i}logm^{v}_{i} + (1-m^{v}_{i})log(1-m^{v}_{i}) \Bigg) \\
+&- \sum_{j} \Bigg(m^{h}_{j}logm^{h}_{j} + (1-m^{h}_{j})log(1-m^{h}_{j}) \Bigg)
+\end{split}
+\end{equation}
+
+The pseudo code of this algorithm is shown below:
+

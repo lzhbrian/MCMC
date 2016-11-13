@@ -1,0 +1,50 @@
+%!TEX root = RBM.tex
+
+\subsubsection{Annealed Importance Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/AIS.m} in Matlab}}
+Annealed Importance Sampling(AIS)\cite{neal2001annealed,salakhutdinov2009learning} is probably one of the most preferable estimating methods avaible.
+
+Previous work \cite{mackay2003information} have shown that if $P_{A}$ and $P_{B}$ in the SIS method is not close enough, the estimator would be very poor.
+
+Based on SIS, the main idea of this algorithm is to gradually alter the value from an known $Z_{A}$ to our required $Z_{B}$ (or $Z_{K}$), by the following identity:
+\begin{equation}
+\frac{Z_{K}}{Z_{0}} = \frac{Z_{1}}{Z_{0}} \frac{Z_{2}}{Z_{1}} ... \frac{Z_{K}}{Z_{K-1}}
+\end{equation}
+where 
+\begin{equation}
+\frac{Z_{K}}{Z_{k+1}} = \frac{1}{M} \sum_{i=1}^{M} \frac{P_{k+1}^{*}(\mathbf x^{(i)})}{P_{k}^{*}(\mathbf x^{(i)})}
+~~where~ x^{(i)} \sim P_{k}
+\end{equation}
+in which we can get $x_{k+1}$ from:
+\begin{equation}
+\begin{aligned}
+p(h^{A}_{j}=1|\mathbf v) &= sigmoid\Bigg( (1-\beta_{k})\Bigg(\sum_{i}W^{A}_{ij}v_{i}+a^{A}_{j}\Bigg) \Bigg) \\
+p(h^{B}_{j}=1|\mathbf v) &= sigmoid\Bigg( \beta_{k}\Bigg(\sum_{i}W^{B}_{ij}v_{i}+a^{B}_{j}\Bigg) \Bigg) \\ 
+p(v'_{i}=1|\mathbf h) &= sigmoid\Bigg( (1-\beta_{k})\Bigg(\sum_{j}W^{A}_{ij}h_{i}^{A}+b^{A}_{i}\Bigg) \\
+& + \beta_{k}\Bigg(\sum_{j}W^{B}_{ij}h_{j}^{B}+b^{B}_{i}\Bigg) \Bigg) 
+\end{aligned}
+\end{equation}
+this procedure is shown in Figure~\ref{fig:xkxk1}.
+
+\begin{figure}[tb]
+% \vspace{-0.5in}
+  	\centering
+  	\includegraphics[width=0.4\textwidth]{figure/xkxk1.png}
+% \vspace{-0.2in}
+	\caption{The transition process from $x_{k}$ to $x_{k+1}$ which leaves $P_{k}(\mathbf v)$ invariant.}
+	\label{fig:xkxk1}
+\end{figure}
+
+Note that model A indicates an initial model which we can easily compute all its configurations.
+
+$\mathbf \beta$ in the above equations is defined by users as a set of inverse temperatures $\{0= \beta_{1} < \beta_{2} < ... < \beta_{K} =1\}$, which can define a sequence of
+\begin{equation}
+P_{k}(\mathbf x) \propto P_{A}^{*}(\mathbf x)^{1-\beta_{k}} P_{B}^{*}(\mathbf x)^{\beta_{k}}
+\end{equation}
+where 
+\begin{equation}
+P^{*}_{k}(\mathbf v)=\sum_{h^{A}h^{B}}e^{(1-\beta_{k})E(\mathbf v, \mathbf h^{A};\theta_{A})+\beta_{k}E(\mathbf v,\mathbf h^{B};\theta_{B})}
+\end{equation}
+
+
+The pseudo code of this algorithm is shown below:
+
