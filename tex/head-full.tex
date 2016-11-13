@@ -5,6 +5,7 @@
 \usepackage{multirow}
 \usepackage{color}
 \usepackage{chngpage}
+\usepackage{url}
 
 \newcommand{\para}[1]{{\vspace{2pt} \bf \noindent #1 \hspace{8pt}}}
 
@@ -20,10 +21,11 @@
 
 \begin{document}
 
-\title{MCMC}
+\title{Markov Chain Monte Carlo}
+\subtitle{Introduction, Comparison \& Analysis}
 \author{
-    \alignauthor Tzu-Heng Lin, 2014011054\\
-    \affaddr{W42, Department of Electronic Engineering, Tsinghua
+    \alignauthor Tzu-Heng Lin, 2014011054, W42\\
+    \affaddr{Department of Electronic Engineering, Tsinghua
       University, Beijing, China\\}
     \email{lzhbrian@gmail.com}
 }
@@ -31,7 +33,8 @@
 
 \maketitle
 \begin{abstract}
-Write in the last.
+Markov Chain Monte Carlo (MCMC) is a technique to make an estimation of a statistic by simulation in a complex model. Restricted Bolztmann Machine(RBM) is a crucial model in the field of Machine Learning. However, training a large RBM model will include intractable computation of the partition functions, i.e.Z($\theta$). This problem has aroused interest in the work of estimation using a MCMC methods.
+In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most prevalent sampling methods, and analyze its correctness \& performance. We then implement three algorithms: TAP, AIS, RTS, to estimate partition functions of an RBM model. Our work not only give an introduction about the available algorithms, but systematically compare the performance \& difference between them. We seek to provide an overall view in the field of MCMC.
 \end{abstract}
 
 
@@ -44,17 +47,18 @@ Write in the last.
 
 \input{Introduction}
 \input{Relatedwork}
+\newpage
 \input{Metropolis_hastings}
+\newpage
 \input{RBM}
-% \input{Dataset}
-% \input{Analysis}
-% \input{Clustering}
-% \input{Reason}
 
 
+
+
+\newpage
 % Conclusion
 \section{Conclusion} \label{sec:conclusion}
-Write in the last.
+In this paper, we discuss about the Monte Carlo sampling method which are now undoubtedly one of the most important sampling methods. We systematically compare three methods of partition function estimation. As future work, we would like to join more methods to the comparison and if could, propose some improvement to the algorithms available.
 
 
 \renewcommand{\baselinestretch}{1.1}
@@ -64,7 +68,7 @@ Write in the last.
 
 % Acknowledgement
 \section{Acknowledgement} \label{sec:acknowledgement}
-I would like to thank ....
+I would like to thank Yubo Chen, Liren Yu, Yuanxin Zhang, XueChao Wang, Changran Hu, for the discussion with me on the algorithms. Without them, I wouldn't have the possibility to accomplish this work in such a short time. This paper is a project of Stochastic Process Course in Tsinghua University, taught by Prof. Zhijian Ou.
 
 % Reference
 \bibliographystyle{abbrv}

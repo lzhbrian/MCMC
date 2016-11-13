@@ -1,7 +1,32 @@
 %!TEX root = head-full.tex
 
-\section{Estimation on normalize \\ constant used in RBM} \label{sec:rbm}
+\section{Partition Function Estimation} \label{sec:rbm}
 
-% the study of video access behavior
 
-\para{Video Access Behavior.}These works usually focus on one single system, and their analysis is also limited to a specific context. In contrast, our work collects a dataset of video viewing behaviors across six major video providers with contexts such as VoD, IPTV, live streaming. This allows us to understand user migratory patterns across content providers. \cite{roberts1997weak} analyze the influence of video stream quality on user behavior from multiple CPs using quasi-experimental designs, but they do not have an in-depth study of characterizing migration behaviors.  
+
+\subsection{Restricted Bolztmann Machine}
+Restricted Bolzmann Machine ...
+However, calculating partition functions has always been a ...
+
+
+
+\subsection{Algorithms}
+
+\subsubsection{Thouless-Anderson-Palmer Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/TAP.m} in Matlab}}
+
+
+
+\subsubsection{Annealed Importance Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/AIS.m} in Matlab}}
+\subsubsection{Rao-Blackwellized Tempered Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/RTS.m} in Matlab}}
+\subsubsection{Other method}
+There are many other methods which can also estimate the partition functions. Such as Self-adjusted mixture sampling(SAMS)\cite{tan2015optimally} proposed a method to estimate multiple partition functions together to improve the efficiency. As the length \& time limit, we only implement 3 methods here in this paper.
+
+
+\subsection{Estimating Results}
+
+
+
+\subsection{Performance Analysis}
+\subsubsection{}
+
+
