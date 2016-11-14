@@ -13,7 +13,7 @@ rng('default')
 %% Load RBM model configuration
 load('./data/h10.mat')
 load('./data/h20.mat')
-load('./data/h100.mat')
+% load('./data/h100.mat')
 load('./data/h500.mat')
 	% Including Data:
 		% parameter_W
@@ -54,7 +54,7 @@ tic
 	a = parameter_a;	% hidden
 	b = parameter_b;	% visible
 	beta = 0:1/100:1;	% Set beta with length:K
-	outer_iteration_time = 100;
+	outer_iteration_time = 50;
 	iteration_time = 100;
 	transition_time = 50;
 	[logZ_RTS,c] = RTS(W, b, a, testbatchdata, beta, outer_iteration_time, iteration_time, transition_time);

@@ -73,11 +73,27 @@ In a continual Markov Chain, such as the experiment we are going to do in the ne
 The method we get $x_{k+1}$ from $x_{k}$ is to add a sampled point of a normal distribution with a variance of the jump size and $\mu=0$. For a two dimension example, we have:
 \begin{equation}
 x_{k+1} = x_{k} + sd.T \left( \begin{array}{ccc}
-norm_{1} \\
-norm_{2} \end{array} \right) 
+n_{1} \\
+n_{2} \end{array} \right) 
 \end{equation}
 
-The pseudo code of this algorithm is shown below:
+	\begin{algorithm}
+        \caption{Metropolis-Hastings}
+        \begin{algorithmic}
+        	\Require Required distribution $p$, Transfer Matrix $Q$
+        	\State Initialize $x_{1}$ 
+            \For{$t = 1 \to \inf$}
+                \State Sample $y \sim q(x|x_{t})$
+	            \State Sample $u \sim U{[0,1]}$
+	            \If {$u < \alpha(x_{t},y)=min\{\frac{p(y)q(x_{t}|y)}{p(x_{t})q(y|x_{t})},1\}$}
+	                \State $x_{t+1} \gets y$
+	            \Else
+	            	\State $x_{t+1} \gets x_{t}$
+	            \EndIf
+			\EndFor
+        \end{algorithmic}
+    \end{algorithm}
+
 
 
 
@@ -96,10 +112,10 @@ $$ \rho = 0.5 $$
 We then generate 10,000 samples using the MH algorithm and take the second half (i.e. the last 5,000 points), setting the standard deviation of proposal to 3.0. We can see from the result (Figure~\ref{fig:sample_result}) that we have derived 5,000 sampled points whose pearson correlation value $\rho=0.50009$, which matches the theoretical value.
 
 \begin{figure}[tb]
-% \vspace{-0.5in}
+\vspace{-0.5in}
   	\centering
   	\includegraphics[width=0.4\textwidth]{figure/sample_result.eps}
-% \vspace{-0.2in}
+\vspace{-0.2in}
 	\caption{Sampling result of 5,000 points \protect\\ correlation = 0.50009 , set sd.T = 3.0}
 	\label{fig:sample_result}
 \end{figure}
@@ -115,10 +131,10 @@ MH algorithm is an effective MCMC method for many diverse problems. However, for
 Roberts et al. have shown in previous work\cite{roberts1997weak} that the optimal accepting rate of the MH algorithm should approximately be at 0.234 for the case of an N-dimensional Gaussian target distribution. We test the accepting rates in different proposal jump size(Figure~\ref{fig:acc_sdt}) and find that the optimal value should be at appoximately 3.0 to acquire a model with accepting rate being close to 0.234. That is the reason why we choose 3.0 as our proposal jump size.
 
 \begin{figure}[tb]
-% \vspace{-0.5in}
+\vspace{-0.2in}
   	\centering
   	\includegraphics[width=0.4\textwidth]{figure/acc_sdt.eps}
-% \vspace{-0.2in}
+\vspace{-0.2in}
 	\caption{Accepting rate on different proposal jump size.}
 	\label{fig:acc_sdt}
 \end{figure}

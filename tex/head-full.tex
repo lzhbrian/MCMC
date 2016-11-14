@@ -6,6 +6,9 @@
 \usepackage{chngpage}
 \usepackage{url}
 \usepackage{amsmath}
+\usepackage{caption}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 \newtheorem{theorem}{Theorem}[section]
 
@@ -35,7 +38,9 @@
 
 \maketitle
 \begin{abstract}
-Markov Chain Monte Carlo (MCMC) is a technique to make an estimation of a statistic by simulation in a complex model. Restricted Bolztmann Machine(RBM) is a crucial model in the field of Machine Learning. However, training a large RBM model will include intractable computation of the partition functions, i.e.Z($\theta$). This problem has aroused interest in the work of estimation using a MCMC methods.
+\footnote{Tzu-Heng Lin is currently an undergraduate student in Dept.of Electronic Engineering, Tsinghua University. His research interests include Big Data Mining, Machine Learning, etc. For more information about him, please see www.linkedin.com/in/lzhbrian. 
+
+Feel free to contact him at any time via lzhbrian@gmail.com or linzh14@mails.tsinghua.edu.cn}Markov Chain Monte Carlo (MCMC) is a technique to make an estimation of a statistic by simulation in a complex model. Restricted Bolztmann Machine(RBM) is a crucial model in the field of Machine Learning. However, training a large RBM model will include intractable computation of the partition functions, i.e.Z($\theta$). This problem has aroused interest in the work of estimation using a MCMC methods.
 In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most prevalent sampling methods, and analyze its correctness \& performance, along with the choice of the accepting rate. We then implement three algorithms: TAP, AIS, RTS, to estimate partition functions of an RBM model. Our work not only give an introduction about the available algorithms, but systematically compare the performance \& difference between them. We seek to provide an overall view in the field of MCMC.
 \end{abstract}
 
@@ -47,14 +52,16 @@ In this paper, we first conduct Metropolis-Hastings Algorithm, one of the most p
 %
 \printccsdesc
 
+
 \input{Introduction}
+
+\input{Relatedwork}
+
 \input{Metropolis_hastings}
+
 \input{RBM}
 
 
-% Conclusion
-
-\input{Relatedwork}
 
 \section{Conclusion} \label{sec:conclusion}
 In this paper, we discuss about the Markov Chain Monte Carlo method which are now undoubtedly one of the most important sampling methods.

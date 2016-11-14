@@ -99,8 +99,9 @@ function [logZ,c] = RTS(W, b, a, batchdata, beta, outer_iteration_time, iteratio
 								% length:K
 				end
 				% q(beta|x) known:x_k+1 ; for diff:k(beta) ;
-				q_x_beta = exp(log_q_x_beta);
-				log_q_beta_x = log_q_x_beta + log(r) - log(Z) - log(sum(q_x_beta.*r./Z));
+% 				q_x_beta = exp(log_q_x_beta);
+% 				log_q_beta_x = log_q_x_beta + log(r./Z) - log(sum(q_x_beta.*r./Z));
+                log_q_beta_x = log_q_x_beta + log(r./Z) - logsum(log_q_x_beta+log(r./Z),2);
 				q_beta_x = exp(log_q_beta_x);	% length:K
 
 		% second part: from q(beta|x) get beta

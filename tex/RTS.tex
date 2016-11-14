@@ -35,6 +35,24 @@ In our real practice, we directly use the initializing method mentioned above by
 
 Also, we found that we have to conduct the procedure above for several times s.t. we can acquire our desired partition function value.(i.e. We did it for 100 times, that is to say we update $\mathbf Z$ for 100 times).
 
-The pseudo code of this algorithm is shown below:
-
-
+	\begin{algorithm}
+        \caption{Rao-Blackwellized Tempered Sampling}
+        \begin{algorithmic}
+        	\Require $\{\beta_{k},r_{k}\}_{k=1,...,K}$
+            \State Initialize $b_{A}$ by dataset
+        	\State Initialize $log \hat{Z}_{k}, k=2,...,K$ 
+            \For{$n = 1 \to Runtime$}
+            	\State Initialize $\beta \in \{\beta_{1}...\beta_{K}\}$
+            	\State Initialize $\hat{c}_{k}=0, k=1,...,K$
+                \For{$t = 1 \to N$}
+                    \For{$t = 1 \to Transition time$}
+                        \State Sample $\mathbf x_{k+1}$ given $\mathbf x_{k}$ using $q(x|\beta^{*})$
+                    \EndFor
+                    \State $\mathbf x^{*} \gets \mathbf x_{k+1}$
+    	            \State Sample $\beta^{*} \sim (\beta|\mathbf x^{*})$ or $\beta^{*} \in \{\beta_{1}...\beta_{K}\}$
+    	            \State Update $\hat{c}_{k} \gets \hat{c}_{k}+\frac{1}{N} q(\beta_{k}|\mathbf x^{*})$
+    			\EndFor
+                \State Update $\hat{Z}^{RTS}_{k} \gets \hat{Z}_{k}\frac{r_{1}\hat{c}_{k}}{r_{k}\hat{c}_{1}}, k=2,...,K$
+            \EndFor
+        \end{algorithmic}
+    \end{algorithm}

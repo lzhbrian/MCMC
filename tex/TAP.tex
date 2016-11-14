@@ -7,6 +7,16 @@ Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training} is a very effici
 
 The main idea of this method is to iteratively compute the magnetization vector $m^{v}$,$m^{h}$, and then input the values into the Legendre transform of the free energy $F=log(Z(\theta))$ to compute it.
 
+The iteration of $m^{v}$ and $m^{h}$ follows:
+\begin{equation}
+\begin{aligned}
+m^{h}_{j}{[t+1]} & = sigmoid\Bigg[b_{j} + \sum_{i}W_{ij}m^{v}_{i}{[t]} - \\
+& W^{2}_{ij} \Bigg(m^{h}_{j}{[t] - \frac{1}{2}} \Bigg) \Big(m^{v}_{i}{[t]}-(m^{v}_{i}{[t]})^{2} \Big) \Bigg] \\ 
+m^{h}_{i}{[t+1]} & = sigmoid\Bigg[a_{i} + \sum_{j}W_{ij}m^{h}_{j}{[t+1]} - \\
+& W^{2}_{ij} \Bigg(m^{v}_{i}{[t] - \frac{1}{2}} \Bigg) \Big(m^{h}_{j}{[t+1]}-(m^{h}_{j}{[t+1]})^{2} \Big) \Bigg]
+\end{aligned}
+\end{equation}
+
 The Legendre transform of $F$ to the second order is:
 \begin{equation}
 \begin{split}
@@ -24,7 +34,17 @@ S(\mathbf m^{v},\mathbf m^{h}) &= - \sum_{i} \Bigg(m^{v}_{i}logm^{v}_{i} + (1-m^
 \end{equation}
 
 \para{Practice}
-In the real practice, in the next subsection, we see TAP method can obtain a converged result in a very short time, but has less accuracy. And sometimes, the converged results are periodic, which is not what we want by us.
+For real practice, in the next subsection, we see TAP method can obtain a converged result in a very short time, but has less accuracy. And sometimes, the converged results are periodic, which is not what we want by us.
 
-The pseudo code of this algorithm is shown below:
-
+	\begin{algorithm}
+        \caption{Thouless-Anderson-Palmer Sampling}
+        \begin{algorithmic}
+        	\Require Required Iteration time $N$, 
+        	\State Initialize $m^{v}$, $m^{h}$ 
+            \For{$t = 1 \to N$}
+            	\State $m^{h}{[t+1]} \gets f(m^{h}{[t]})$
+            	\State $m^{v}{[t+1]} \gets f(m^{v}{[t]},m^{v}{[t+1]})$
+			\EndFor
+			\State $logZ(\theta) \gets \Gamma(\mathbf m^{v},\mathbf m^{h})$
+        \end{algorithmic}
+    \end{algorithm}

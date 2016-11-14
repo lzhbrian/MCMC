@@ -56,5 +56,15 @@ Originally, we initialize model A with a configuration of $\theta=\{0,0,0\}$. Th
 In our real practice, we find that this method take less than 0.005 second to initialize $\mathbf b$ even for a very big model (i.e.784 visible and 500 hidden units), but have strongly improved the result as we will mention in the next subsection.
 
 
-The pseudo code of this algorithm is shown below:
-
+	\begin{algorithm}
+        \caption{Annealed Importance Sampling}
+        \begin{algorithmic}
+        	\Require Required $\beta_{k}$ s.t. $0 = \beta_{0} < \beta_{1} < ... < \beta_{K} = 1$
+        	\State Initialize $b_{A}$ by dataset
+        	\State Sample $\mathbf x_{1}$ from $P_{A} = P_{0}$
+            \For{$k = 1 \to K-1$}
+                \State Sample $\mathbf x_{k+1}$ given $\mathbf x_{k}$ using $T_{k}(\mathbf x_{k+1} \longleftarrow \mathbf x_{k+1})$
+			\EndFor
+			\State Set $\omega_{AIS} = \prod_{k=1}^{K}P^{*}_{k}(\mathbf x_{k})/P^{*}_{k-1}(\mathbf x_{k})$
+        \end{algorithmic}
+    \end{algorithm}
