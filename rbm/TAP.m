@@ -11,6 +11,7 @@
 		% b - hidden bias
 		% max_iteration_time
 		% set_eps - for convergence
+        % plot_or_not - 1 to plot
 	% Output:
 		% Z - Z(theta)
 		% Convergent_time - Convergent time
@@ -21,7 +22,7 @@
 	% Marylou Gabrie et al.
 	% Training Restricted Boltzmann Machines via the Thouless-Anderson-Palmer Free Energy
 
-function [Z, Convergent_time] = TAP(W, a, b, max_iteration_time, set_eps)
+function [Z, Convergent_time] = TAP(W, a, b, max_iteration_time, set_eps, plot_or_not)
 
 	fprintf('Running TAP with max_iter_time=%d, eps=%f ...\n',max_iteration_time,set_eps);
 	% Note: logsig(n) = 1 / (1 + exp(-n))
@@ -32,10 +33,13 @@ function [Z, Convergent_time] = TAP(W, a, b, max_iteration_time, set_eps)
 		% a little bit diff for a,b
 		W_2 = W.^2;			% W^2
 		Convergent_time = 0;
-
+    
 	%% calc m^{v} & m^{h} Eq.9,10
-		m_v = randn(1,len_vis);		% represent m_v(t)
-		m_h = randn(1,len_hid);		% represent m_h(t)
+    if plot_or_not == 1
+        figure;
+    end
+		m_v = zeros(1,len_vis);		% represent m_v(t)
+		m_h = zeros(1,len_hid);		% represent m_h(t)
 		for iter = 1:max_iteration_time
 			last_m_v = m_v;
 			last_m_h = m_h;
@@ -45,9 +49,16 @@ function [Z, Convergent_time] = TAP(W, a, b, max_iteration_time, set_eps)
 				Convergent_time = iter;
 				fprintf('\tConvergent in %d times\n',iter)
 				break;
-			end
-		end
-
+            end
+            if plot_or_not == 1
+                subplot(2,1,1);hold on;scatter(iter,mean(m_h),'r');
+                subplot(2,1,2);hold on;scatter(iter,mean(m_v),'b');
+            end
+        end
+        xlabel('Iteration Time')
+        subplot(2,1,1);ylabel('m_h');set(gca,'fontsize',16)
+        subplot(2,1,2);ylabel('m_v');set(gca,'fontsize',16)
+        
 	%% Add them all
 		% Calc Entropy: S(m^{v},m^{h})
 		m_v_entropy = m_v*log(m_v)' + (1-m_v)*log(1-m_v)';

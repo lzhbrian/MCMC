@@ -1,6 +1,8 @@
 %!TEX root = RBM.tex
 
 \subsubsection{Thouless-Anderson-Palmer Sampling\protect\footnote{Available at \protect\url{https://github.com/lzhbrian/MCMC/blob/master/rbm/TAP.m} in Matlab}}
+
+\para{Algorithm}
 Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training} is a very efficient and easy-to-practice iterative procedure based on an improved mean field method from statistical physics called Thouless-Anderson-Palmer approach.
 
 The main idea of this method is to iteratively compute the magnetization vector $m^{v}$,$m^{h}$, and then input the values into the Legendre transform of the free energy $F=log(Z(\theta))$ to compute it.
@@ -20,6 +22,9 @@ S(\mathbf m^{v},\mathbf m^{h}) &= - \sum_{i} \Bigg(m^{v}_{i}logm^{v}_{i} + (1-m^
 &- \sum_{j} \Bigg(m^{h}_{j}logm^{h}_{j} + (1-m^{h}_{j})log(1-m^{h}_{j}) \Bigg)
 \end{split}
 \end{equation}
+
+\para{Practice}
+In the real practice, in the next subsection, we see TAP method can obtain a converged result in a very short time, but has less accuracy. And sometimes, the converged results are periodic, which is not what we want by us.
 
 The pseudo code of this algorithm is shown below:
 

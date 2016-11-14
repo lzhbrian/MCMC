@@ -4,7 +4,7 @@
 % Implementation of AIS-method to estimate Z(theta)
 % in matlab
 
-% Very much rely on Prof. Ruslan Salakhutdinov's Ph.D thesis:
+% Very much rely on Prof. Ruslan Salakhutdinov's Ph.D thesis, and his code:
 	% LEARNING DEEP GENERATIVE MODELS
 
 %% Info
@@ -58,7 +58,7 @@ tt=1;
 
 %%% The CORE of an AIS RUN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for bb = beta(2:end-1);  
-	% fprintf(1,'beta=%d\r',bb);
+	fprintf(1,'beta=%d\r',bb);
 	tt = tt+1; 
 
 	expWh = exp(bb*Wh);
@@ -95,4 +95,10 @@ logZZ_est_down = logdiff([(log(3)+logstd_AIS);r_AIS]) + logZZ_base;
 if ~isreal(logZZ_est_down)
 	logZZ_lat_comp_down = 0;
 end
+
+fprintf('Final, Estimated log Z(theta)=%f\nupper and lower is:%f, %f\n',...
+    logZZ_est,logZZ_est_up,logZZ_est_down)
+
+
+
 

@@ -26,10 +26,10 @@ If we are given a probability distribution $p(x)$, it would be a great thing if 
 In this paper, we implement the Metropolis-Hastings Algorithm\cite{metropolis1953equation,hastings1970monte}, which is one of the most widely used sampling method. We also deal with the accepting rate, which I will introduce later, for previous work\cite{roberts1997weak} have shown that the accepting rate may influence the result of the experiment and there is theoretical support in choosing an optimal accepting rate.
 
 \para{Restricted Boltzmann Machine}
-A Restricted Bolztmann Machine (RBM)\cite{mcclelland1987parallel} is a significant work bringing hypothesis in statistical physics to computer science. By stacking several layers of RBM, we will get a fundamental model, Deep Belief Network\cite{hinton2006reducing}, in the field of Deep Learning, which is nowadays the hottest class of algorithms used in Machine Learning.
+A Restricted Bolztmann Machine (RBM)\cite{mcclelland1987parallel} is a significant work bringing theory in statistical physics to computer science. By stacking several layers of RBM, we will get a fundamental model, Deep Belief Network\cite{hinton2006reducing}, in the field of Deep Learning, which is nowadays the hottest class of algorithms used in Machine Learning.
 
 \para{Estimating Partition functions} 
-In the process of training an RBM, however, will include incontractable computation of the partition function. When the model grows large, the complexity of this work will be incompletable. The good news is, several researches have shown that there are ways to avoid this by using an MCMC approach instead, to estimate it.
+In the process of training an RBM, however, will include incontractable computation of the partition function. When the model grows large, the complexity of this work will be incompletable. The good news is, researches have shown that there are ways to avoid this by using an MCMC approach instead, to estimate it.
 
 In this paper, we implement three prevalent MCMC methods of estimating a partition function, Thouless-Anderson-Palmer Sampling(TAP)\cite{gabrie2015training}, Annealed Importance Sampling (AIS)\cite{neal2001annealed,salakhutdinov2009learning}, Rao-Blackwellized Tempered Sampling(RTS)\cite{carlson2016partition}, respectively, and give an overall comparison on the theory \& performance between them.
 

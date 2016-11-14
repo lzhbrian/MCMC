@@ -1,0 +1,48 @@
+%!TEX root = RBM.tex
+
+
+\subsection{Performance Analysis}
+
+Since TAP's result is relatively irrelevant to the run time and resources. We use the value estimated in the last subsection.
+
+\subsubsection{Practice}
+\para{Complexity}
+For horizontal comparison on complexity, we let the correctness \& stability to be approximately the same (i.e. the correctness the AIS could achieve in 2 seconds), and compare the run time for three algorithms.
+
+We have conducted 20 experiments for the acquistion of $Z(\theta)$.
+
+From our practice, we have found that xxx gives the most agreeable result while TAP completely underestimate the value.
+
+
+\para{Correctness \& Stability}
+For horizontal comparison on the correctness \& stability, we allow the same run time for AIS and RTS algorithms to compute (i.e. 10 seconds per experiment). We have conducted 20 experiments for the acquistion of $Z(\theta)$.
+
+From our practice, we have found that xxx gives the most agreeable result while TAP completely underestimate the value.
+
+We also notice that the variance of ... is the smallest which indicates it has the best stability.
+
+
+
+\subsubsection{Theoretical}
+\para{RTS}
+From a theretical perspective, we have proven that the bias \& the variance of the RTS method are to be:
+\begin{equation}
+E{[ log \hat{Z}_{k}^{RTS} ]} - E{[Z_{k}]} \approx \frac{1}{2}{[\frac{\sigma^{2}_{1}}{\hat{c}^{2}_{1}}-\frac{\sigma^{2}_{k}}{\hat{c}^{2}_{k}}]} 
+\end{equation}
+\begin{equation}
+Var{[ log \hat{Z}_{k}^{RTS} ]} \approx \frac{\sigma^{2}_{1}}{\hat{c}^{2}_{1}} + \frac{\sigma^{2}_{k}}{\hat{c}^{2}_{k}} - \frac{2\sigma_{1k}}{\hat{c}_{k}\hat{c}_{1}}
+\end{equation}
+where $\sigma^{2}_{k} = Var{[\hat{c}_{k}]}$ and $\sigma_{1k} = Cov{[\hat{c}_{1},\hat{c}_{k}]}$
+
+This has shown that the bias of RTS has no definite sign.
+
+\para{AIS}
+However, in AIS, Neal and Jarzynski et al.\cite{neal2001annealed,nonequilibrium} have shown that if we want the result to be unbiased, we would have to let $M=1$ in the iteration, which by doing so have lost the advantage of AIS. That is to say, on the other hand, if $M > 1$, we would have a negative bias due to Jenson Inequality.
+
+
+
+
+\para{TAP}
+Although TAP shows the best efficiency, its results are the most disapointing. Apparantly TAP has underestimate the value of the partition function.
+
+We did not analyze deep on the reason why it failed to perform a satisfying result, but our intuition tell that maybe it is because the Legendre transform. In our practice, we only took the Legendre transform to the 2nd order, which might result in the underestimation.

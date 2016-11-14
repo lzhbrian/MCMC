@@ -20,6 +20,7 @@ Given a non periodic Markov Chain, if
 \end{equation}
 then $\pi(x)$ is the stationary distribution of this Markov Chain.
 \end{theorem}
+So, the key question will be how to construct a Markov Chain which satisfy this Detail Balance Condition.
 
 \subsubsection{MCMC sampling method}
 Suppose we already have a transition matrix $Q$ for a Markov Chain, $q(i,j)$ denote the probabilty of transition from state $i$ to state $j$. For the general case, 
@@ -76,6 +77,7 @@ norm_{1} \\
 norm_{2} \end{array} \right) 
 \end{equation}
 
+The pseudo code of this algorithm is shown below:
 
 
 
@@ -108,7 +110,7 @@ We then generate 10,000 samples using the MH algorithm and take the second half 
 \subsection{Performance Analysis}
 
 \subsubsection{Choice of proposal jump size}
-MH algorithm is an effective MCMC method for many diverse problems. However, its efficiency depends crucially on the selection of the proposal density. With the proposal jump size being small, the accepting rate would be very low and eventually stick to only one point(eg. the initial point); When the proposal jump size is too big, the accepting rate would be too high. 
+MH algorithm is an effective MCMC method for many diverse problems. However, for a continual case in MH algorithm, its performance somewhat depends on the selection of the proposal density. With the proposal jump size being small, the accepting rate would be very low and eventually stick to only one point(eg. the initial point); When the proposal jump size is too big, the accepting rate would be too high. 
 
 Roberts et al. have shown in previous work\cite{roberts1997weak} that the optimal accepting rate of the MH algorithm should approximately be at 0.234 for the case of an N-dimensional Gaussian target distribution. We test the accepting rates in different proposal jump size(Figure~\ref{fig:acc_sdt}) and find that the optimal value should be at appoximately 3.0 to acquire a model with accepting rate being close to 0.234. That is the reason why we choose 3.0 as our proposal jump size.
 
@@ -129,6 +131,7 @@ Due to the limit of the accepting rate, for a high dimensional condition, using 
 
 \subsection{Gibbs Sampling}
 Gibbs Sampling is a special case of Metropolis Hastings Algorithm, by letting the accepting rate = 1, we will get a Gibbs Sampler. As the length \& time limit, we will not specify more here.
+But it is worthy to notice that Gibbs sampling method is used more often than Metropolis-Hastings method in the real practice, probably because it has a slightly simpler process.
 
 
 

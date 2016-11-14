@@ -23,7 +23,7 @@
 	% David E. Carlson et al.
 	% Partition Functions from Rao-Blackwellized Tempered Sampling
 
-function [logZ] = RTS(W, b, a, batchdata, beta, outer_iteration_time, iteration_time, transition_time)
+function [logZ,c] = RTS(W, b, a, batchdata, beta, outer_iteration_time, iteration_time, transition_time)
 
 	%% load data
 	fprintf('Running RTS...\n');
@@ -114,10 +114,14 @@ function [logZ] = RTS(W, b, a, batchdata, beta, outer_iteration_time, iteration_
 		
 		% Update Z_k^{RTS}
 		Z = [Z(1) ,Z(2:K).*(c(2:K)./r(2:K))*(r(1)/c(1))];
+        fprintf('Finished %d iteration\n', o_iter);
 	end
 
 	% Get log(Z)
-	Z = log(Z);
-	fprintf('Final, Estimated log Z(theta)=%d\n',Z);
+	logZ = log(Z);
+	fprintf('Final, Estimated log Z(theta)=%d\n',logZ(K));
 
+%     figure;
+%     plot(1:K,c,'--gs','MarkerSize',10)
+    
 end

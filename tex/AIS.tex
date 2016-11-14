@@ -49,7 +49,11 @@ P^{*}_{k}(\mathbf v)=\sum_{h^{A}h^{B}}e^{(1-\beta_{k})E(\mathbf v, \mathbf h^{A}
 
 
 \para{Initialize $Z_{A}$ with dataset}
-In \cite{salakhutdinov2009learning}, Ruslan et al. also notice a method to make $Z_{A}$ near $Z_{B}$. As the length \& time limit, we will not specify it here.
+In \cite{salakhutdinov2009learning}, Ruslan also notice a method to make $Z_{A}$ near $Z_{B}$. As the length \& time limit, we will not specify the process here.
+
+Originally, we initialize model A with a configuration of $\theta=\{0,0,0\}$. This method can use the training data to initialize the visible bias $\mathbf b$ to a desired value s.t. we can get a better outcome of the estimation.
+
+In our real practice, we find that this method take less than 0.005 second to initialize $\mathbf b$ even for a very big model (i.e.784 visible and 500 hidden units), but have strongly improved the result as we will mention in the next subsection.
 
 
 The pseudo code of this algorithm is shown below:
