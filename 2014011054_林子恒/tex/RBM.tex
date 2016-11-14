@@ -1,0 +1,66 @@
+%!TEX root = head-full.tex
+
+\section{Partition Function Estimation} \label{sec:rbm}
+
+
+\subsection{Restricted Bolztmann Machine}
+Co-invented and enhanced largely\cite{hinton2006reducing} by Geoff Hinton, a Restricted Bolzmann Machine(RBM)\cite{mcclelland1987parallel} is a model which brings the idea of a physics concept to the field of computer science.
+
+\begin{figure*}[tb]
+% \vspace{-0.5in}
+  	\centering
+  	\includegraphics[width=1\textwidth]{figure/rbm.png}
+% \vspace{-0.2in}
+	\caption{A Restricted Boltzmann Machine}
+	\label{fig:rbm}
+\end{figure*}
+
+\subsubsection{Introduction}
+An RBM is a two-layer undirected model(Figure~\ref{fig:rbm}). The first layer of the RBM is called visible layer, and the second is called the hidden layer. In the model, every visible units are connected to all hidden units and vice versa. For every given value of visible layer $\mathbf v$ \& hidden layer $\mathbf h$, we can define an energy of this state.
+\begin{equation}
+E(\mathbf v,\mathbf h;\theta)=-\mathbf v^T\mathbf W\mathbf h-\mathbf b^T\mathbf v-\mathbf a^T\mathbf h
+\end{equation}
+where $\theta =\{W,\mathbf b,\mathbf a\}$ are the model configurations. $W_{ij}$ represents the weight between visible unit $v_{i}$ and hidden unit $h_{j}$. $\mathbf b$ \& $\mathbf a$ are biases for visible and hidden layer, respectively.
+
+\subsubsection{Training an RBM}
+On training an RBM, we want our RBM model to have a lowest scale of energy. By doing so, we have to calculate the joint distribution over the visible and hidden units, which is defined by:
+\begin{equation}
+	p(\mathbf v,\mathbf h;\theta)=\frac{e^{-E(\mathbf v,\mathbf h;\theta)}}{Z(\theta)}
+\end{equation}
+where
+\begin{equation}
+	Z(\theta)=\sum_{\mathbf v} \sum_{\mathbf h} e^{-E(\mathbf v,\mathbf h;\theta)}
+\end{equation}
+is the partition function.
+
+However, calculating partition functions has always been an intractable work since we have to traverse all the possible state of $\mathbf v$ \& $\mathbf h$.
+When the model grows large, this process will be very time \& rescouces consuming and thus become unrealistic for the real practice.
+
+So, we have to introduce methods to estimate the partition functions instead of just calculating it in brute force. Although some deviation may include in the estimation, but the efficiency along with them make them preferable. In fact, studies have shown that only few deviation is included that we could just ignore it since it does petty influence on our training.
+
+In the next subsection, we will discuss about three methods available, which each have their pros and cons in doing this complex estimation.
+
+
+
+\subsection{Algorithms}
+
+\input{TAP}
+\input{AIS}
+\input{RTS}
+
+\subsubsection{Other methods}
+There are many other methods which can also estimate the partition functions. Such as Self-adjusted mixture sampling(SAMS)\cite{tan2015optimally} proposed a method to estimate multiple partition functions together to improve the efficiency. As the length \& time limit, we only implement 3 methods here in this paper.
+
+\input{numresults}
+
+\input{theoretical}
+
+
+
+
+
+
+
+
+
+
