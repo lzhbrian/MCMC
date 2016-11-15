@@ -13,7 +13,7 @@ __Markov Chain Monte Carlo (MCMC)__ is a technique to make an estimation of a st
 
 ### Author
 
-__Tzu-Heng Lin__ is currently an undergraduate student in the Dept. of Electronic Engineering, Tsinghua University. His research interests include Big Data Mining, Machine Learning, etc. For more information about him, please see www.linkedin.com/in/lzhbrian. Feel free to contact him at any time via lzhbrian@gmail.com or linzh14@mails.tsinghua.edu.cn
+[__Tzu-Heng Lin__](www.linkedin.com/in/lzhbrian) is currently an undergraduate student in the Dept. of Electronic Engineering, Tsinghua University. His research interests include Big Data Mining, Machine Learning, etc. For more information about him, please see www.linkedin.com/in/lzhbrian . Feel free to contact him at any time via lzhbrian@gmail.com or linzh14@mails.tsinghua.edu.cn
 
 ```bash
 ├── LICENSE
